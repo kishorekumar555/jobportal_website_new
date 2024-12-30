@@ -33,13 +33,7 @@
         <div class="col-6 col-md-3 mb-4 mb-md-0">
           <h3>Contact Us</h3>
           <div class="footer-social">
-            <a href="#"><span class="icon-facebook"></span></a>
-            <a href="#"><span class="icon-twitter"></span></a>
-            <a href="#"><span class="icon-instagram"></span></a>
-            <a href="#"><span class="icon-linkedin"></span></a>
+            <x-small.medialinks/>
           </div>
         </div>
-      </div>
-      <x-small.medialinks></x-small.medialinks>
-    </div>
   </footer>

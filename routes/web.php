@@ -15,5 +15,9 @@ Route::resource('job',JobController::class)->except(['store'])
 ->name('show','Jobshow')
 ->name('create','Jobcreate');
 Route::resource('recruiter',RecruiterPostController::class)->except(['store'])
-->name('index','JobPostlist');
+->name('index','JobPostlist')
+->name('show','JobPostview');
 Route::get('/auth',[AuthController::class,'showAuth'])->name('Auth');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::view('/profile','profile')->name('Profile');

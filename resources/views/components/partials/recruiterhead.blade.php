@@ -9,7 +9,12 @@
           <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
             <li><a href="{{ route('Home') }}" class="nav-link active">Home</a></li>
             <li><a href="{{ route('About') }}">About</a></li>
-            <li><a href="{{ route('Joblist') }}">Job Listings</a></li>
+            <li class="has-children">
+                <a href="{{ route('JobPostlist') }}">Job Postings</a>
+                <ul class="dropdown">
+                  <li><a href="{{ route('Jobcreate') }}">Post a Job</a></li>
+                </ul>
+            </li>
             <li><a href="{{ route('Contact') }}">Contact</a></li>
           </ul>
         </nav>

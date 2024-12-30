@@ -1,3 +1,6 @@
+@php 
+$user="recruiter";
+@endphp
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,7 +25,6 @@
 
   <div id="overlayer"></div>
   <x-small.spinner></x-small.spinner>
-    
 <div class="site-wrap">
 
     <div class="site-mobile-menu site-navbar-target">
@@ -33,8 +35,11 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div> <!-- .site-mobile-menu -->
-    
-    <x-partials.header></x-partials.header>
+    @if($user=="jobseeker")
+      <x-partials.header></x-partials.header>
+    @elseif($user=="recruiter")
+      <x-partials.recruiterhead></x-partials.recruiterhead>  
+    @endif 
     {{ $slot }}
     <x-partials.footer></x-partials.footer>
     </div>

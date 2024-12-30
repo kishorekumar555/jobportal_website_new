@@ -1,6 +1,6 @@
 @props(['companyname'=>'CompanyName','JobDesg'=>'Job Designation','Applied'=>50])
 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-    <a href="{{ route('Home') }}"></a>
+    <a href="{{ route('JobPostview',1) }}"></a>
     <div class="job-listing-logo">
       <img src="/images/job_logo_1.jpg" alt="Image" class="img-fluid">
     </div>
