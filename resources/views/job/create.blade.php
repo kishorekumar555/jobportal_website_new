@@ -27,26 +27,17 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="row">
-              <div class="col-6">
-                <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn btn-block btn-primary btn-md">Save Job</a>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="row mb-5">
           <div class="col-lg-12">
-            <form class="p-4 p-md-5 border rounded" method="post">
+            <form class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data" action="{{ route('JobStore') }}">
+              @csrf
               <h3 class="text-black mb-5 border-bottom pb-2">Job Details</h3>
               
               <div class="form-group">
-                <label for="company-website-tw d-block">Upload Featured Image</label> <br>
+                <label for="featured_image" class="d-block">Upload Featured Image</label> <br>
                 <label class="btn btn-primary btn-md btn-file">
-                  Browse File<input type="file" hidden>
+                  Browse File<input type="file" name="featured_image" hidden>
                 </label>
               </div>
 
@@ -87,12 +78,10 @@
               </div>
 
 
-              {{-- <div class="form-group">
+              <div class="form-group">
                 <label for="job-description">Job Description</label>
-                <div class="editor" id="editor-1">
-                  <p>Write Job Description!</p>
-                </div>
-              </div> --}}
+                <textarea id="job-description" class="form-control" placeholder="Describe your company"></textarea>
+              </div>
 
 
               <h3 class="text-black my-5 border-bottom pb-2">Company Details</h3>
@@ -106,12 +95,10 @@
                 <input type="text" class="form-control" id="company-tagline" placeholder="e.g. New York">
               </div>
 
-              {{-- <div class="form-group">
-                <label for="job-description">Company Description (Optional)</label>
-                <div class="editor" id="editor-2">
-                  <p>Description</p>
-                </div>
-              </div> --}}
+              <div class="form-group">
+                <label for="job-description">Company Description</label>
+                <textarea id="job-description" class="form-control" placeholder="Describe your company"></textarea>
+              </div>
               
               <div class="form-group">
                 <label for="company-website">Website (Optional)</label>
@@ -125,7 +112,7 @@
 
               <div class="form-group">
                 <label for="company-website-tw">Twitter Username (Optional)</label>
-                <input type="text" class="form-control" id="company-website-tw" placeholder="@companyname">
+                <input type="text" class="form-control" id="company-website-tw" placeholder="companyname">
               </div>
               <div class="form-group">
                 <label for="company-website-tw">Linkedin Username (Optional)</label>
@@ -133,29 +120,25 @@
               </div>
 
               <div class="form-group">
-                <label for="company-website-tw d-block">Upload Logo</label> <br>
+                <label for="company_logo" class="d-block">Upload Logo</label> <br>
                 <label class="btn btn-primary btn-md btn-file">
-                  Browse File<input type="file" hidden>
+                  Browse File<input type="file" name="company_logo" hidden>
                 </label>
               </div>
-
+              <div class="row align-items-center mb-5">
+          
+                <div class="col-lg-4 ml-auto">
+                  <div class="row">
+                    <div class="col-6">
+                      <button type="submit" class="btn btn-block btn-primary btn-md">Save Job</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
 
          
-        </div>
-        <div class="row align-items-center mb-5">
-          
-          <div class="col-lg-4 ml-auto">
-            <div class="row">
-              <div class="col-6">
-                <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn btn-block btn-primary btn-md">Save Job</a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
