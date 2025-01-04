@@ -24,26 +24,26 @@
               @csrf
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="UserType">User Type</label>
-                  <input type="text" name="UserType" id="UserType" class="form-control" placeholder="User Type">
+                  <label class="text-black" for="UserTypeSignUp">User Type</label>
+                  <input type="text" name="user_type" id="UserTypeSignUp" class="form-control" placeholder="User Type">
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="Name">Name</label>
-                  <input type="text" name="Name" id="Name" class="form-control" placeholder="Name">
+                  <label class="text-black" for="NameSignUp">Name</label>
+                  <input type="text" name="name" id="NameSignUp" class="form-control" placeholder="Name">
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="Email">Email</label>
-                  <input type="email" name="Email" id="Email" class="form-control" placeholder="Email address">
+                  <label class="text-black" for="EmailSignUp">Email</label>
+                  <input type="email" name="email" id="EmailSignUp" class="form-control" placeholder="Email address">
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="Password">Password</label>
-                  <input type="password" name="Password" id="Password" class="form-control" placeholder="Password">
+                  <label class="text-black" for="PasswordSignUp">Password</label>
+                  <input type="password" name="password" id="PasswordSignUp" class="form-control" placeholder="Password">
                 </div>
               </div>
               <div class="row form-group">
@@ -60,14 +60,14 @@
               @csrf
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="Email">Email</label>
-                  <input type="email" name="Email" id="Email" class="form-control" placeholder="Email address">
+                  <label class="text-black" for="EmailLogIn">Email</label>
+                  <input type="email" name="email" id="EmailLogIn" class="form-control" placeholder="Email address">
                 </div>
               </div>
               <div class="row form-group mb-4">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="text-black" for="Password">Password</label>
-                  <input type="password" name="Password" id="Password" class="form-control" placeholder="Password">
+                  <label class="text-black" for="PasswordLogIn">Password</label>
+                  <input type="password" name="password" id="PasswordLogIn" class="form-control" placeholder="Password">
                 </div>
               </div>
               <div class="row form-group">
