@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,12 +10,25 @@ class Profile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_type', 'full_name', 'email', 'qualifications', 'education',
-        'company_name', 'company_tagline', 'company_website', 'phone', 'profile_photo'
+        'full_name',
+        'email',
+        'profile_photo',
+        'work_experiences'
     ];
 
-    public function workExperiences()
+    /**
+     * Accessor to decode work experiences JSON.
+     */
+    public function getWorkExperiencesAttribute($value)
     {
-        return $this->hasMany(WorkExperience::class);
+        return json_decode($value, true) ?? [];
+    }
+
+    /**
+     * Mutator to encode work experiences JSON.
+     */
+    public function setWorkExperiencesAttribute($value)
+    {
+        $this->attributes['work_experiences'] = json_encode($value);
     }
 }

@@ -15,5 +15,5 @@ $trending3='DevOps';
           </section>
           
           <x-small.jobstats :$totalcandidates :$totalJobPosted :$JobsFilled :$Companies/>
-          <x-slot:relatedortotal>43,167 Job Listed</x-slot:relatedortotal>
+          <x-slot:relatedortotal>{{$totalJobListings ?? 0}} Job Listed</x-slot:relatedortotal>
 </x-job-layout>

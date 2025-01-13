@@ -9,6 +9,9 @@ class Joblist extends Model
 {
     use HasFactory;
 
+    public const JOB_TYPE_PART_TIME = 'Part Time';
+    public const JOB_TYPE_FULL_TIME = 'Full Time';
+    protected $table='joblist';
     protected $fillable = [
         'email',
         'job_title',
