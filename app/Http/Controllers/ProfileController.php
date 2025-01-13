@@ -1,73 +1,70 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Profile;
-use App\Models\WorkExperience;
+
 class ProfileController extends Controller
 {
-    public function show($id = null)
+    /**
+     * Display the user's profile.
+     */
+    public function show($id)
     {
-        // Load profile if ID exists, else create an empty profile object
-        $profile = Profile::with('workExperiences')->find($id) ?? new Profile();
-        return view('profile', compact('profile'));
+        $profile = Profile::find($id);
+
+        return view('profile', [
+            'profile' => $profile
+        ]);
     }
-public function update(Request $request, $id = null)
-{
-    // Validate request data
-    $request->validate([
-        'full_name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'phone' => 'nullable|string|max:20',
-        'qualifications' => 'nullable|string',
-        'education' => 'nullable|string',
-    ]);
 
-    // Check if profile exists or create a new one
-    $profile = Profile::updateOrCreate(
-        ['id' => $id], // Find by ID
-        [
-            'full_name' => $request->full_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'qualifications' => $request->qualifications,
-            'education' => $request->education,
-        ]
-    );
+    /**
+     * Update the user's profile.
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'work_experiences' => 'nullable|array',
+            'work_experiences.*.job_title' => 'required_with:work_experiences|string|max:255',
+            'work_experiences.*.company_name' => 'required_with:work_experiences|string|max:255',
+            'work_experiences.*.start_date' => 'required_with:work_experiences|date',
+            'work_experiences.*.end_date' => 'nullable|date|after_or_equal:work_experiences.*.start_date',
+            'work_experiences.*.description' => 'nullable|string|max:1000'
+        ]);
 
-    // Handle work experiences (Add or Update)
-    if ($request->has('work_experience')) {
-        foreach ($request->work_experience as $experience) {
-            if (isset($experience['id'])) {
-                // Update existing experience
-                WorkExperience::where('id', $experience['id'])->update([
-                    'job_title' => $experience['job_title'],
-                    'company_name' => $experience['company_name'],
-                    'start_date' => $experience['start_date'],
-                    'end_date' => $experience['end_date'],
-                    'description' => $experience['description'],
-                ]);
-            } else {
-                // Create new experience
-                WorkExperience::create([
-                    'profile_id' => $profile->id,
-                    'job_title' => $experience['job_title'],
-                    'company_name' => $experience['company_name'],
-                    'start_date' => $experience['start_date'],
-                    'end_date' => $experience['end_date'],
-                    'description' => $experience['description'],
-                ]);
-            }
+        $profile = Profile::find($id);
+
+        if (!$profile) {
+            return response()->json(['success' => false, 'message' => 'Profile not found.'], 404);
         }
-    }
 
-    // Handle profile photo upload
-    if ($request->hasFile('profile_photo')) {
-        $path = $request->file('profile_photo')->store('profile_photos', 'public');
-        $profile->update(['profile_photo' => $path]);
-    }
+        $profile->full_name = $request->input('full_name');
+        $profile->email = $request->input('email');
 
-    // Redirect to profile page
-    return redirect()->route('ProfileShow', ['id' => $profile->id]);
-}
+        // Handle profile photo upload
+        if ($request->hasFile('profile_photo')) {
+            if ($profile->profile_photo) {
+                Storage::delete($profile->profile_photo);
+            }
+            $profile->profile_photo = $request->file('profile_photo')->store('profile_photos');
+        }
+
+        // Save work experiences as JSON
+        $profile->work_experiences = json_encode($request->input('work_experiences', []));
+
+        if ($profile->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Profile updated successfully.',
+                'profile' => $profile
+            ]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Failed to update profile.']);
+    }
 }

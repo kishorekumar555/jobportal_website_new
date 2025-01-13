@@ -16,11 +16,12 @@ Route::get('/joblist',[JobCreateController::class,'index'])->name('Joblist');
 Route::get('/joblist/{id}',[JobCreateController::class,'showJob'])->name('Jobshow');
 Route::post('/jobcreate',[JobCreateController::class,'store'])->name('JobStore');
 Route::get('/jobcreate',[JobCreateController::class,'create'])->name('JobCreate');
-Route::resource('recruiter',RecruiterPostController::class)->except(['store'])
-->name('index','JobPostlist')
-->name('show','JobPostview');
+Route::resource('recruiter', RecruiterPostController::class)->names([
+    'index' => 'JobPostlist',
+    'show' => 'JobPostview',
+]);
 Route::get('/auth',[AuthController::class,'showAuth'])->name('Auth');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/profile/{id}',[ProfileController::class,'show'])->name('ProfileShow');
-Route::post('/profile/{id}',[ProfileController::class,'update'])->name('ProfileUpdate');
+Route::post('/profile/update/{id}',[ProfileController::class,'update'])->name('ProfileUpdate');
